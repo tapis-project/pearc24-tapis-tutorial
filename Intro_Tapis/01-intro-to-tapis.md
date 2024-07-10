@@ -20,6 +20,7 @@ All this is hosted for you, you don't have to stand up your own servers to acces
 
 ### A Number of Science Gateways and projects leverage Tapis:
 
+* [ICICLE](https://icicle.osu.edu)
 * [Cyverse](https://cyerse.org)
 * [Design-safe](https://www.designsafe-ci.org/#!#research)
 * [VDJ](https://vdjserver.org/)
@@ -48,4 +49,4 @@ You don't have to do a lot of complex things to use Tapis.  If you just want som
 Full documentation and guides for using Tapis can be found here:
 https://tapis.readthedocs.io/en/latest/​
 
-[Next-> Intro to Workflows](./05-intro-to-workflows.md)
+

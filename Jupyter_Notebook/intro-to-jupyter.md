@@ -7,7 +7,7 @@ Jupyter is an open source project that provides a webapp interface for writing c
 ### Download Notebook
 
 Dowload the Jupyter Notebook by clicking the link below:
-[Download Notebook](TACCSTER23_sentiment_analysis.ipynb)
+[Download Notebook](sentiment_analysis.ipynb)
 
 ### Starting up your Jupyter Notebook Environment
 
@@ -17,7 +17,7 @@ You may login with your google accounts.
 
 ### Uploading your notebook
 
-On successful login, upload the Tapis_workflows_mpm.ipynb notebook and open it to run. 
+On successful login, upload the sentiment_analysis.ipynb notebook and open it to run. 
 
 
 

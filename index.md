@@ -1,13 +1,13 @@
 # Tapis ML tutorial
 
 ## Schedule
-* 12.30 PM Welcome
-* 12:40 PM - Introduction to Tapis 
-* 1:00 PM - Tapis Auth and Systems 
-* 1:30 PM - Natural Language Processing, Hugging Face, Transformers
-* 2:30 PM - Tapis ML app
-* 3:30 PM - Tapis Jobs
-* 4.15 PM - Q/A
+* 1.30 PM Welcome
+* 1:40 PM - Introduction to Tapis 
+* 2:00 PM - Tapis Auth and Systems 
+* 2:30 PM - Natural Language Processing, Hugging Face, Transformers
+* 3:30 PM - Tapis ML app
+* 4:30 PM - Tapis Jobs
+* 5.15 PM - Q/A
 
 The resources you will be using today are provided by funding from the National Science Foundation:
 
@@ -30,5 +30,5 @@ The resources you will be using today are provided by funding from the National 
 * [Intro to Tapis Jobs](./Tapis_apps_jobs/04-jobs.md)
 
 ## Jupyter Notebook
-* [Notebook](./Jupyter_Notebook/TACCSTER23_sentiment_analysis.ipynb)
+* [Notebook](./Jupyter_Notebook/sentiment_analysis.ipynb)
  
