@@ -1,12 +1,12 @@
-# Tapis ML tutorial
+# Trustworthy, Reproducible Machine Learning with Tapis
 
 ## Schedule
-* 1.30 PM Welcome
+* 1.30 PM - Welcome
 * 1:40 PM - Introduction to Tapis 
-* 2:00 PM - Tapis Auth and Systems 
-* 2:30 PM - Natural Language Processing, Hugging Face, Transformers
-* 3:30 PM - Tapis ML app
-* 4:30 PM - Tapis Jobs
+* 2:00 PM - Tapis Authentication and Systems API
+* 2:30 PM - Introduction to Natural Language Processing and HuggingFace
+* 3:30 PM - Using the Transformers Library for Sentiment Analysis
+* 4:30 PM - Introduction to Tapis Apps and Jobs 
 * 5.15 PM - Q/A
 
 The resources you will be using today are provided by funding from the National Science Foundation:

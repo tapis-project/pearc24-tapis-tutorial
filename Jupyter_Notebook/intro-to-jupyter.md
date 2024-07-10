@@ -1,5 +1,5 @@
 Introduction to the Jupyter Notebook Environment
-===
+===================================================
 
 
 Jupyter is an open source project that provides a webapp interface for writing code and documents. Throughout this tutorial, we will be using a Jupyter Notebook environment for making Tapis User Requests. 
