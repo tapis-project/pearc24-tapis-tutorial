@@ -1,11 +1,9 @@
 import argparse, csv, os
-import constants
 
 from typing import List, Tuple
 from typing_extensions import TypedDict
 
 from transformers import pipeline
-
 
 class Analysis(TypedDict):
     label: str
@@ -62,30 +60,51 @@ def store_results(results: AnalysisResult) -> None:
     Args:
         results (List): The results of the analysis.
     """
-    
-    #if there was no sentence provided, prints this message, else prints the results
-    with open(constants.DEFAULT_OUTPUT_FILE_PATH, mode='a', newline='') as file:
+    # Determine where to write the output
+    tapis_app_id = os.environ.get('_tapisAppId')
+    if tapis_app_id is None:
+        # Not running under Tapis, write to /tmp
+        print('Not running under Tapis. Writing output to /tmp\n')
+        outputPath = '/tmp/results.csv'
+    else:
+        # Running under Tapis.
+        print('Running under Tapis: _tapisAppId=%s\n' % tapis_app_id)
+        # If Docker, write to /TapisOutput,
+        # else write to $_tapisExecSystemOutputDir
+        tapis_sing_name = os.environ.get('SINGULARITY_NAME')
+        if tapis_sing_name is None:
+            print('Running via Tapis using Docker\n')
+            outputPath = '/TapisOutput/results.csv'
+        else:
+            print('Running via Tapis using Singularity\n')
+            outputDir = os.environ.get('_tapisExecSystemOutputDir')
+            if outputDir is None:
+                print('WARNING: _tapisExecSystemOutputDir not set. Using /tmp for output.')
+                outputPath = '/tmp/results.csv'
+            else:
+                outputPath = outputDir + "/results.csv"
+    print('Using output path: %s\n' % outputPath)
+
+    # Print output to screen and write to file
+    with open(outputPath, mode='a', newline='') as file:
         writer = csv.writer(file)
         labels = [label_data['label'] for _, analysis in results for label_data in analysis]
         labels.insert(0,"SENTENCE")
         writer.writerow(labels)
         for sentence, analysis in results:
             scores = ['%.3f' % label_data['score'] for label_data in analysis]
-            writer.writerow(
-                [sentence] + scores)
-    
+            writer.writerow([sentence] + scores)
+
 def main():
     parser = argparse.ArgumentParser()
-
     parser.add_argument('--sentences', type=str, nargs="+", help='Sentence for analyzing.')
     parser.add_argument('--files', type=str, nargs="+", help='File(s) upon which to run sentiment analysis')
     parser.add_argument('--model', default='j-hartmann/emotion-english-distilroberta-base', type=str, nargs='?', help='choose from the following models',
                         required=False,
                         choices=['j-hartmann/emotion-english-distilroberta-base','checkpoint','distilbert/distilbert-base-uncased-finetuned-sst-2-english']
                         )
-    # args = parser.parse_args()
-    
     flags, _ = parser.parse_known_args()
+
     store_results(analyze(flags))
 
 if __name__ == '__main__':

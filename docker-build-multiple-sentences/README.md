@@ -1,8 +1,8 @@
 # docker_build
-This folder can be used to build docker images in order to run `sentiment_analysis.py`.
+This folder can be used to build docker images in order to run `analyze_sentiment.py`.
 
 ***analyze_sentiment.py***
-- This python script contains all the necessary components to analyze any sentence that a user provides.
+- Python script performing sentiment analysis on data provided by user.
 
 # Docker Image Handling
 > This is assuming that docker is already installed on the system.
@@ -10,7 +10,7 @@ This folder can be used to build docker images in order to run `sentiment_analys
 ## Running the image:
 To run the image, run this command:
 ```bash
-$ docker run jaeestee/sentiment-analysis:0.2 <arguments>
+$ docker run tapis/sentiment-analysis:1.0.1 <arguments>
 ```
 There are multiple arguments built into this application. Here are your options:
 |Arguments|Explanation|Options|Example|
@@ -18,9 +18,15 @@ There are multiple arguments built into this application. Here are your options:
 |sentence|The sentence to analyze. (Technically optional, but that's no fun)|Anything|--sentence='I love potatoes'|
 |model|Model to use. (Optional)|[Link](https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads)|--model='j-hartmann/emotion-english-distilroberta-base'|
 |return all scores|Choose to either return all or only one score. Anything other than f or false is considered as true. Capitalization does not matter. (Optional since the default is "True")|f, false, true|--return_all_scores='false'| 
+
+> Example of running the image with default model
+> ```bash
+> $ docker run --user $(id -u):$(id -g) --mount type=bind,source=/tmp,target=/tmp tapis/sentiment-analysis:1.0.1 --sentence='I love potatoes'
+> ```
+
 > Example of running the image with all arguments:
 > ```bash
-> $ docker run jaeestee/sentiment-analysis:0.2 --sentence='I love potatoes' --model='j-hartmann/emotion-english-distilroberta-base' --return_all_scores='f'
+> $ docker run --user $(id -u):$(id -g) --mount type=bind,source=/tmp,target=/tmp tapis/sentiment-analysis:1.0.1 --sentence='I love potatoes' --model='j-hartmann/emotion-english-distilroberta-base' --return_all_scores='f'
 > ```
 > Output:
 > ```
@@ -34,35 +40,25 @@ There are multiple arguments built into this application. Here are your options:
 > joy,97.50%
 > ```
 
-Running the image using this command:
-```bash
-$ sudo python3 sentiment_analysis.py <arguments>
-```
-Will allow the results, in csv format, to be saved onto the machine. File name is `results.csv`.
+Results will be saved in `/tmp/results.csv`.
 
 ## Pulling the image:
 To pull the existing image, run this command:
 ```bash
-$ docker pull jaeestee/sentiment-analysis:0.2
+$ docker pull tapis/sentiment-analysis:1.0.1
 ```
-If done properly, ``jaeestee/sentiment-analysis`` should show up with the tag ``latest`` when running this command:
+The image should now be available on the local host:
 ```bash
 $ docker images
 ```
 > The output should look similar to this:
 > ```
 > REPOSITORY                    TAG    IMAGE ID       CREATED         SIZE
-> jaeestee/sentiment-analysis   0.2    d8276d24fa21   2 hours ago     897MB
+> tapis/sentiment-analysis      1.0.1  d8276d24fa21   2 hours ago     897MB
 > ```
 
 ## Building the image:
 To build the image, run this command:
 ```bash
-$ docker build -t <DockerHub Username>/sentiment-analysis:<tag> .
-```
-- replace all the <> with custom 
-If done properly, there should be a success message like this:
-```
-Successfully built d8276d24fa21
-Successfully tagged jaeestee/sentiment-analysis:latest
+$ docker build -t tapis/sentiment-analysis:1.0.1 .
 ```

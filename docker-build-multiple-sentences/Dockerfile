@@ -2,9 +2,14 @@
 
 FROM huggingface/transformers-pytorch-cpu:4.18.0
 
-COPY analyze_sentiment.py constants.py config.json /app/
-RUN mkdir /.cache
-RUN chmod 777 /.cache
-WORKDIR /app
+# Add user tapis
+RUN useradd -m tapis
+USER tapis
 
-ENTRYPOINT ["python3","/app/analyze_sentiment.py"]
+WORKDIR /home/tapis
+RUN mkdir .cache
+RUN chmod 777 .cache
+
+COPY --chown=tapis:tapis analyze_sentiment.py .
+
+ENTRYPOINT ["python3","/home/tapis/analyze_sentiment.py"]
